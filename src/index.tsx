@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as PropTypes from 'prop-types';
 import SizeAndPositionManager, {ItemSize} from './SizeAndPositionManager';
 import {
@@ -31,18 +32,8 @@ const STYLE_INNER: React.CSSProperties = {
   minHeight: '100%',
 };
 
-const STYLE_ITEM: {position: 'absolute', left: number, width: string} = {
-  position: 'absolute',
-  left: 0,
-  width: '100%',
-};
-
 export interface ItemStyle {
-  position: 'absolute',
-  top?: number,
-  left: number,
-  width: string | number,
-  height?: number,
+  top?: number
 }
 
 interface StyleCache {
@@ -71,6 +62,9 @@ export interface Props {
   scrollToAlignment?: ALIGNMENT,
   scrollDirection?: DIRECTION,
   style?: any,
+  transitionName: string,
+  transitionDuration: number,
+  getRef?: (ref: HTMLDivElement) => void,
   width?: number | string,
   onItemsRendered?({startIndex, stopIndex}: RenderedRows): void,
   onScroll?(offset: number, event: React.UIEvent<HTMLDivElement>): void,
@@ -253,11 +247,9 @@ export default class VirtualList extends React.PureComponent<Props, State> {
     if (style) { return style; }
 
     const {scrollDirection = DIRECTION_VERTICAL} = this.props;
-    const {size, offset} = this.sizeAndPositionManager.getSizeAndPositionForIndex(index);
+    const {offset} = this.sizeAndPositionManager.getSizeAndPositionForIndex(index);
 
     return this.styleCache[index] = {
-      ...STYLE_ITEM,
-      [sizeProp[scrollDirection]]: size,
       [positionProp[scrollDirection]]: offset,
     };
   }
@@ -282,6 +274,9 @@ export default class VirtualList extends React.PureComponent<Props, State> {
       scrollToIndex,
       scrollToAlignment,
       style,
+      getRef,
+      transitionName,
+      transitionDuration,
       width,
       ...props,
     } = this.props;
@@ -311,14 +306,21 @@ export default class VirtualList extends React.PureComponent<Props, State> {
 
     return (
       <div ref={this.getRef} {...props} onScroll={this.handleScroll} style={{...STYLE_WRAPPER, ...style, height, width}}>
-        <div style={{...STYLE_INNER, [sizeProp[scrollDirection]]: this.sizeAndPositionManager.getTotalSize()}}>
+        <ReactCSSTransitionGroup
+          transitionName={transitionName}
+          transitionEnterTimeout={transitionDuration}
+          transitionLeaveTimeout={transitionDuration}
+          component="div"
+          style={{...STYLE_INNER, [sizeProp[scrollDirection]]: this.sizeAndPositionManager.getTotalSize()}}
+        >
           {items}
-        </div>
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
 
   private getRef = (node: HTMLDivElement): void => {
     this.rootNode = node;
+    if(this.props.getRef) this.props.getRef(node);
   }
 }
