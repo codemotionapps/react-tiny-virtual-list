@@ -1,9 +1,3 @@
-export type ALIGNMENT = 'auto' | 'center' | 'end' | 'start';
-export const ALIGN_AUTO: ALIGNMENT = 'auto';
-export const ALIGN_START: ALIGNMENT = 'start';
-export const ALIGN_CENTER: ALIGNMENT = 'center';
-export const ALIGN_END: ALIGNMENT = 'end';
-
 export type DIRECTION = 'horizontal' | 'vertical';
 export const DIRECTION_VERTICAL: DIRECTION = 'vertical';
 export const DIRECTION_HORIZONTAL: DIRECTION = 'horizontal';

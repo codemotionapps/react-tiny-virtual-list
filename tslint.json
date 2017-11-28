@@ -9,6 +9,8 @@
     "restrict-plus-operands": false,
     "match-default-export-name": false,
     "jsx-use-translation-function": false,
-    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type", "check-typecast"]
+    "trailing-comma-interface": false,
+    "one-line": false,
+    "whitespace": false
   }
 }

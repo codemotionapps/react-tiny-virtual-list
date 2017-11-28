@@ -15,10 +15,7 @@ const entry = resolvePath(intermediateBuild, './index.js');
 compileTypescript('--target ES5');
 
 Promise.all([
-  runRollup({entry, output: 'react-tiny-virtual-list.es.js', format: 'es'}),
-  runRollup({entry, output: 'react-tiny-virtual-list.cjs.js', format: 'cjs'}),
-  // runRollup({entry, output: 'react-tiny-virtual-list.js', format: 'umd'}),
-  // runRollup({entry, output: 'react-tiny-virtual-list.min.js', format: 'umd', minify: true}),
+  runRollup({entry, output: 'react-tiny-virtual-list.js', format: 'cjs'})
 ])
   .then(cleanIntermediateBuild)
   .catch((error) => {

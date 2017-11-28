@@ -1,6 +1,4 @@
 /* Forked from react-virtualized 💖 */
-import {ALIGNMENT, ALIGN_START, ALIGN_END, ALIGN_CENTER} from './constants';
-
 export type ItemSizeGetter = (index: number) => number;
 export type ItemSize = number | number[] | ItemSizeGetter;
 
@@ -15,25 +13,21 @@ interface SizeAndPositionData {
 
 export interface Options {
   itemCount: number,
-  itemSizeGetter: ItemSizeGetter,
-  estimatedItemSize: number,
+  itemSizeGetter: ItemSizeGetter
 }
 
 export default class SizeAndPositionManager {
   private itemSizeGetter: ItemSizeGetter;
   private itemCount: number;
-  private estimatedItemSize: number;
   private lastMeasuredIndex: number;
   private itemSizeAndPositionData: SizeAndPositionData;
 
   constructor({
     itemCount,
     itemSizeGetter,
-    estimatedItemSize,
   }: Options) {
     this.itemSizeGetter = itemSizeGetter;
     this.itemCount = itemCount;
-    this.estimatedItemSize = estimatedItemSize;
 
     // Cache of size and position data for items, mapped by item index.
     this.itemSizeAndPositionData = {};
@@ -42,12 +36,8 @@ export default class SizeAndPositionManager {
     this.lastMeasuredIndex = -1;
   }
 
-  updateConfig({
-    itemCount,
-    estimatedItemSize,
-  }: {itemCount: number, estimatedItemSize: number}) {
+  updateConfig({itemCount}: {itemCount: number}) {
     this.itemCount = itemCount;
-    this.estimatedItemSize = estimatedItemSize;
   }
 
   getLastMeasuredIndex() {
@@ -101,51 +91,11 @@ export default class SizeAndPositionManager {
    * As items as measured the estimate will be updated.
    */
   getTotalSize(): number {
+    if(this.itemCount > 0){
+      this.getSizeAndPositionForIndex(this.itemCount - 1);
+    }
     const lastMeasuredSizeAndPosition = this.getSizeAndPositionOfLastMeasuredItem();
-
-    return lastMeasuredSizeAndPosition.offset + lastMeasuredSizeAndPosition.size + (this.itemCount - this.lastMeasuredIndex - 1) * this.estimatedItemSize;
-  }
-
-  /**
-   * Determines a new offset that ensures a certain item is visible, given the alignment.
-   *
-   * @param align Desired alignment within container; one of "start" (default), "center", or "end"
-   * @param containerSize Size (width or height) of the container viewport
-   * @return Offset to use to ensure the specified item is visible
-   */
-  getUpdatedOffsetForIndex({
-    align = ALIGN_START,
-    containerSize,
-    currentOffset,
-    targetIndex,
-  }: {align: ALIGNMENT | undefined, containerSize: number, currentOffset: number, targetIndex: number}): number {
-    if (containerSize <= 0) {
-      return 0;
-    }
-
-    const datum = this.getSizeAndPositionForIndex(targetIndex);
-    const maxOffset = datum.offset;
-    const minOffset = maxOffset - containerSize + datum.size;
-
-    let idealOffset;
-
-    switch (align) {
-      case ALIGN_END:
-        idealOffset = minOffset;
-        break;
-      case ALIGN_CENTER:
-        idealOffset = maxOffset - (containerSize - datum.size) / 2;
-        break;
-      case ALIGN_START:
-        idealOffset = maxOffset;
-        break;
-      default:
-        idealOffset = Math.max(minOffset, Math.min(maxOffset, currentOffset));
-    }
-
-    const totalSize = this.getTotalSize();
-
-    return Math.max(0, Math.min(totalSize - containerSize, idealOffset));
+    return lastMeasuredSizeAndPosition.offset + lastMeasuredSizeAndPosition.size;
   }
 
   getVisibleRange({
