@@ -6,10 +6,7 @@ Following these guidelines helps to communicate that you respect the time of the
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/clauderic/react-tiny-virtual-list/issues) is the preferred channel for bug reports but please respect the following restrictions:
-
-* Please **try not to** use the issue tracker for personal support requests (use [Gitter](https://gitter.im/clauderic/react-tiny-virtual-list)).
-* Please **do not** derail or troll issues. Keep the discussion on topic and respect the opinions of others.
+The [issue tracker](https://github.com/codemotionapps/react-tiny-virtual-list/issues) is the preferred channel for bug reports but please respect the following restrictions:
 
 ## Feature requests
 

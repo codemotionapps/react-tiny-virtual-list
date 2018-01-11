@@ -1,0 +1,7 @@
+tests/
+demo/
+coverage/
+config/
+.travis.yml
+CONTRIBUTING.md
+CHANGELOG.md

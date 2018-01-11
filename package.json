@@ -17,11 +17,11 @@
     "test:ci": "npm run lint && npm run test && codecov"
   },
   "dependencies": {
-    "prop-types": "^15.5.7",
-    "react-addons-css-transition-group": "^15.6.2"
+    "prop-types": "^15.5.7"
   },
   "peerDependencies": {
-    "react": "15.x || 16.x"
+    "react": "15.x || 16.x",
+    "react-addons-css-transition-group": "^15.6.2"
   },
   "devDependencies": {
     "@types/jest": "^20.0.8",
@@ -46,13 +46,14 @@
     "fs-extra": "^4.0.1",
     "jest": "^19.0.2",
     "nwb": "0.15.x",
-    "react": "^15.4.2",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-test-renderer": "^15.4.2",
+    "react": "16.2.0",
+    "react-addons-css-transition-group": "15.6.2",
+    "react-addons-test-utils": "15.6.2",
+    "react-dom": "16.2.0",
+    "react-test-renderer": "16.2.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.50.0",
-    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-babel": "3.0.2",
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-typescript2": "^0.7.0",
@@ -66,14 +67,17 @@
     "email": "me@ced.io"
   },
   "user": "clauderic",
-  "homepage": "https://github.com/clauderic/react-tiny-virtual-list",
+  "homepage": "https://github.com/codemotionapps/react-tiny-virtual-list",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clauderic/react-tiny-virtual-list.git"
+    "url": "https://github.com/codemotionapps/react-tiny-virtual-list.git"
   },
   "bugs": {
-    "url": "https://github.com/clauderic/react-tiny-virtual-list/issues"
+    "url": "https://github.com/codemotionapps/react-tiny-virtual-list/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
     "react",
