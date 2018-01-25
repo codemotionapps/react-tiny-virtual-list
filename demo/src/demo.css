@@ -41,4 +41,6 @@ header img {
   box-sizing: border-box;
   border-bottom: 1px solid #EEE;
   line-height: 50px;
+  position: absolute;
+  width: 100%;
 }
