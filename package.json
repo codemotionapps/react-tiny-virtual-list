@@ -1,6 +1,6 @@
 {
   "name": "@codemotion/react-tiny-virtual-list",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A tiny but mighty list virtualization component, with zero dependencies 💪",
   "main": "build/react-tiny-virtual-list.js",
   "types": "types/index.d.ts",
@@ -20,14 +20,15 @@
     "prop-types": "^15.5.7"
   },
   "peerDependencies": {
-    "react": "15.x || 16.x",
-    "react-addons-css-transition-group": "^15.6.2"
+    "react": "^16.0.0",
+    "react-motion": "^0.5.2"
   },
   "devDependencies": {
     "@types/jest": "^20.0.8",
     "@types/prop-types": "^15.5.1",
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.4",
+    "@types/react-motion": "^0.0.23",
     "awesome-typescript-loader": "^3.2.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -50,6 +51,7 @@
     "react-addons-css-transition-group": "15.6.2",
     "react-addons-test-utils": "15.6.2",
     "react-dom": "16.2.0",
+    "react-motion": "0.5.2",
     "react-test-renderer": "16.2.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.50.0",

@@ -1,6 +1,5 @@
 /* Forked from react-virtualized 💖 */
 export type ItemSizeGetter = (index: number) => number;
-export type ItemSize = number | number[] | ItemSizeGetter;
 
 export interface SizeAndPosition {
   size: number,
@@ -24,7 +23,7 @@ export default class SizeAndPositionManager {
 
   constructor({
     itemCount,
-    itemSizeGetter,
+    itemSizeGetter
   }: Options) {
     this.itemSizeGetter = itemSizeGetter;
     this.itemCount = itemCount;
@@ -67,7 +66,7 @@ export default class SizeAndPositionManager {
 
         this.itemSizeAndPositionData[i] = {
           offset,
-          size,
+          size
         };
 
         offset += size;
@@ -101,7 +100,7 @@ export default class SizeAndPositionManager {
   getVisibleRange({
     containerSize,
     offset,
-    overscanCount,
+    overscanCount
   }: {containerSize: number, offset: number, overscanCount: number}): {start?: number, stop?: number} {
     const totalSize = this.getTotalSize();
 
@@ -133,7 +132,7 @@ export default class SizeAndPositionManager {
 
     return {
       start,
-      stop,
+      stop
     };
   }
 
@@ -169,7 +168,7 @@ export default class SizeAndPositionManager {
       return this.binarySearch({
         high: lastMeasuredIndex,
         low: 0,
-        offset,
+        offset
       });
     } else {
       // If we haven't yet measured this high, fallback to an exponential search with an inner binary search.
@@ -177,7 +176,7 @@ export default class SizeAndPositionManager {
       // The overall complexity for this approach is O(log n).
       return this.exponentialSearch({
         index: lastMeasuredIndex,
-        offset,
+        offset
       });
     }
   }
@@ -220,7 +219,7 @@ export default class SizeAndPositionManager {
     return this.binarySearch({
       high: Math.min(index, this.itemCount - 1),
       low: Math.floor(index / 2),
-      offset,
+      offset
     });
   }
 }

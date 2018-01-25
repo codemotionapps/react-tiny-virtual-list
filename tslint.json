@@ -11,6 +11,10 @@
     "jsx-use-translation-function": false,
     "trailing-comma-interface": false,
     "one-line": false,
-    "whitespace": false
+    "whitespace": false,
+    "trailing-comma": [true, {
+      "multiline": "never"
+    }],
+    "no-shadowed-variable": false
   }
 }

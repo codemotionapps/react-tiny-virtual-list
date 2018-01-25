@@ -10,11 +10,11 @@ export default function createRollupConfig({input, output, format, minify}) {
     output: [{file: output, format}],
     exports: format === 'es' ? 'named' : 'default',
     name: 'VirtualList',
-    external: ['react', 'prop-types', 'react-addons-css-transition-group'],
+    external: ['react', 'prop-types', 'react-motion'],
     globals: {
       react: 'React',
       'prop-types': 'PropTypes',
-      'react-addons-css-transition-group': 'ReactCSSTransitionGroup'
+      'react-motion': 'ReactMotion'
     },
     plugins: [
       nodeResolve({
