@@ -8,6 +8,7 @@ import {
   DIRECTION_HORIZONTAL,
   scrollProp,
   sizeProp,
+  noop,
   positionProp
 } from './constants';
 
@@ -49,6 +50,7 @@ export interface Props {
   // didLeave?(style: TransitionStyle): void,
   keyForIndex(index: number): string,
   renderItem(style: TransitionStyle): React.ReactNode,
+  getContainerRef?(ref: HTMLDivElement): void,
   getRef?(ref: HTMLDivElement): void,
 }
 
@@ -60,6 +62,8 @@ export default class VirtualList extends React.PureComponent<Props, State> {
   static defaultProps = {
     overscanCount: 3,
     scrollDirection: DIRECTION_VERTICAL,
+    getContainerRef: noop,
+    getRef: noop,
     width: '100%'
     // didLeave: () => {} // tslint:disable-line no-empty
   };
@@ -179,6 +183,7 @@ export default class VirtualList extends React.PureComponent<Props, State> {
       scrollDirection = DIRECTION_VERTICAL,
       style,
       getRef,
+      getContainerRef,
       width,
       defaultStyle,
       defaultStyleInvisible,
@@ -231,7 +236,7 @@ export default class VirtualList extends React.PureComponent<Props, State> {
         // didLeave={didLeave}
         styles={items}
       >
-        {(styles) => <div style={{...STYLE_INNER, [sizeProp[scrollDirection]]: this.sizeAndPositionManager.getTotalSize()}}>
+        {(styles) => <div ref={getContainerRef} style={{...STYLE_INNER, [sizeProp[scrollDirection]]: this.sizeAndPositionManager.getTotalSize()}}>
           {styles.map((style) => {
             const { key } = style;
             if(!loadedKeys[key]){
@@ -254,8 +259,6 @@ export default class VirtualList extends React.PureComponent<Props, State> {
 
   private getRef = (node: HTMLDivElement): void => {
     this.rootNode = node;
-    if(this.props.getRef){
-      this.props.getRef(node);
-    }
+    this.props.getRef!(node); // tslint:disable-line no-non-null-assertion
   }
 }

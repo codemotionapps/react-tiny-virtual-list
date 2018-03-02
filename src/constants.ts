@@ -16,3 +16,5 @@ export const positionProp = {
   [DIRECTION_VERTICAL]: 'top',
   [DIRECTION_HORIZONTAL]: 'left'
 };
+
+export function noop(){} // tslint:disable-line no-empty
